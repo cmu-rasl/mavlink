@@ -155,6 +155,7 @@ set(v1.0Definitions
     slugs.xml
     test.xml
     ualberta.xml
+    cmu_mavlink.xml
     )
 generateMavlink("1.0" "${v1.0Definitions}")
 
