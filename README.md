@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/mavlink/mavlink.svg?branch=master)](https://travis-ci.org/mavlink/mavlink)
+For instructions on how to add a new message to this repo, follow the instructions on the wiki [Adding a new Mavlink message](https://github.com/cmu-rasl/mavlink/wiki/Adding-a-new-Mavlink-message)
 
 ## MAVLink ##
 
