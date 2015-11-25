@@ -1,30 +1,41 @@
 <?xml version="1.0"?>
 <mavlink>
-        <include>common.xml</include>
-        <!-- NOTE: If the included file already contains a version tag, remove the version tag here, else uncomment to enable. -->
-	<!--<version>3</version>-->
-	<enums>
-	</enums>
-	<messages>
-		<message id="151" name="IMAGE_TRIGGERED">
-			<description>This message encodes the IMU data with the timestamp and sequence ID of the GPIO trigger for a camera.</description>
-			<field type="uint64_t" name="timestamp">Timestamp of message in usec</field>
-			
-			<field type="float" name="xacc"> </field>
-			<field type="float" name="yacc"> </field>
-			<field type="float" name="zacc"> </field>
+  <include>pixhawk.xml</include>
+  <!-- NOTE: If the included file already contains a version tag, remove the version tag here, else uncomment to enable. -->
+  <!--<version>3</version>-->
+  <enums>
+  </enums>
+  <messages>
+    <message id="207" name="IMAGE_TRIGGERED_IMU">
+      <description>This message encodes the IMU data with the timestamp and sequence ID of the GPIO trigger for a camera.</description>
+      <field type="uint64_t" name="timestamp">Timestamp of message in usec</field>
 
-			<field type="float" name="xgyro"> </field>
-			<field type="float" name="ygyro"> </field>
-			<field type="float" name="zgyro"> </field>
+      <field type="float" name="xacc"> </field>
+      <field type="float" name="yacc"> </field>
+      <field type="float" name="zacc"> </field>
 
-			<field type="float" name="xmag"> </field>
-			<field type="float" name="ymag"> </field>
-			<field type="float" name="zmag"> </field>
+      <field type="float" name="xgyro"> </field>
+      <field type="float" name="ygyro"> </field>
+      <field type="float" name="zgyro"> </field>
 
-			<field type="uint64_t" name="trigger_t"> Timestamp of trigger in usec</field>
-			<field type="uint64_t" name="trigger_seq"> Sequence number of trigger pin</field>
-			<field type="uint8_t"  name="trigger_id"> ID of triggered pin</field>
-		</message>
-	</messages>
+      <field type="float" name="xmag"> </field>
+      <field type="float" name="ymag"> </field>
+      <field type="float" name="zmag"> </field>
+
+      <field type="uint64_t" name="trigger_t"> Timestamp of trigger in usec</field>
+      <field type="uint64_t" name="trigger_seq"> Sequence number of trigger pin</field>
+      <field type="uint8_t"  name="trigger_id"> ID of triggered pin</field>
+    </message>
+
+    <message id="208" name="L1_ADAPTIVE_DEBUG">
+      <description>Debug message to stream diagnostic data from the L1 Adaptive Attitude Controller</description>
+      <field type="uint64_t" name="timestamp">Timestamp of the message in used</field>
+      <field type="uint16_t" name="seq_id">Sequence id of data</field>
+      <field type="float[3]" name="avl_hat">Angular Velocity Estimate </field>
+      <field type="float[3]" name="dst_hat">Disturbance Estimate</field>
+      <field type="float[3]" name="ang_vel">Angular Velocity obtained from R</field>
+      <field type="float[3]" name="lpd">Disturbance Rate Correction</field>
+      <field type="float[3]" name="rates">Body Rates obtained from Attitude Estimator</field>
+    </message>
+  </messages>
 </mavlink>
