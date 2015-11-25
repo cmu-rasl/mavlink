@@ -11,7 +11,7 @@ set(PROJECT_CONTACT_VENDOR mavlink)
 set(LIBRARY_VERSION ${PROJECT_VERSION})
 set(LIBRARY_SOVERSION "0.0.0")
 
-# third party 
+# third party
 # none required
 
 # options
@@ -109,7 +109,7 @@ endif()
 # configure
 #check_include_files(string.h HAVE_STRING_H)
 #check_function_exists(memcopy HAVE_MEMCOPY)
-#check_symbol_exists(LC_MESSAGES "locale.h" HAVE_LC_MESSAGES) 
+#check_symbol_exists(LC_MESSAGES "locale.h" HAVE_LC_MESSAGES)
 #check_library_exists(pthread  attachNode "" HAVE_PTHREAD)
 
 # config files
@@ -122,19 +122,18 @@ macro(generateMavlink version definitions)
         set(targetName ${definition}-v${version})
         set(definitionAbsPath ${CMAKE_SOURCE_DIR}/message_definitions/v${version}/${definition})
         message(STATUS "processing: ${definitionAbsPath}")
-        add_custom_command( 
+        add_custom_command(
             OUTPUT ${targetName}-stamp
-            COMMAND PYTHONPATH=$ENV{PYTHONPATH}:${CMAKE_CURRENT_SOURCE_DIR} ${PYTHON_EXECUTABLE} ${mavgen} --lang=C --wire-protocol=${version}
+            COMMAND PYTHONPATH=$ENV{PYTHONPATH}:${CMAKE_CURRENT_SOURCE_DIR} ${PYTHON_EXECUTABLE} -m pymavlink.tools.mavgen --lang=C --wire-protocol=${version}
                 --output=include/v${version} ${definitionAbsPath}
             COMMAND touch ${targetName}-stamp
-            DEPENDS ${definitionAbsPath} ${mavgen}
             )
         add_custom_target(${targetName} ALL DEPENDS ${targetName}-stamp)
     endforeach()
 endmacro()
 
 # build
-set(mavgen ${CMAKE_SOURCE_DIR}/pymavlink/tools/mavgen.py)
+set(mavgen -m pymavlink.tools.mavgen)
 set(v0.9Definitions
     ardupilotmega.xml
     common.xml
@@ -161,7 +160,7 @@ generateMavlink("1.0" "${v1.0Definitions}")
 
 # testing
 if (BUILD_TEST)
-    if (UNIX) 
+    if (UNIX)
         include_directories(${CMAKE_BINARY_DIR}/include/v0.9/common)
         # TODO fix udp example
         #add_executable(mavlink_udp examples/linux/mavlink_udp.c)

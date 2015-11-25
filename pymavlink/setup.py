@@ -8,10 +8,10 @@ except LookupError:
     func = lambda name, enc=ascii: {True: enc}.get(name=='mbcs')
     codecs.register(func)
 
-from distutils.core import setup, Extension
-import glob, os, shutil, fnmatch
+from setuptools import setup, Extension
+import glob, os, shutil, fnmatch, platform
 
-version = '1.1.43'
+version = '1.1.63'
 
 from generator import mavgen, mavparse
 
@@ -46,6 +46,18 @@ if not "NOGEN" in os.environ:
         print("Building %s" % xml)
         mavgen.mavgen_python_dialect(dialect, mavparse.PROTOCOL_1_0)
 
+extensions = [] # Assume we might be unable to build native code
+if platform.system() != 'Windows':
+    extensions = [ Extension('mavnative',
+                    sources = ['mavnative/mavnative.c'],
+                    include_dirs = [
+                        'generator/C/include_v1.0',
+                        'mavnative'
+                        ]
+                    ) ]
+else:
+    print("Skipping mavnative due to Windows possibly missing a compiler...")
+
 setup (name = 'pymavlink',
        version = version,
        description = 'Python MAVLink code',
@@ -69,7 +81,8 @@ setup (name = 'pymavlink',
                                                      'C/include_v0.9/*.h',
                                                      'C/include_v1.0/*.h',
                                                      'C/include_v1.0/*.hpp' ],
-                        'pymavlink.generator.lib.minixsv': [ '*.xsd' ] },
+                        'pymavlink.generator.lib.minixsv': [ '*.xsd' ],
+                        'pymavlink' : ['mavnative/*.h'] },
        packages = ['pymavlink',
                    'pymavlink.generator',
                    'pymavlink.generator.lib',
@@ -92,6 +105,8 @@ setup (name = 'pymavlink',
                    'tools/mavtomfile.py',
                    'tools/mavgen.py',
                    'tools/mavkml.py',
+                   'tools/mavfft.py',
                    'tools/mavsummarize.py',
-                   'tools/MPU6KSearch.py']
+                   'tools/MPU6KSearch.py'],
+       ext_modules = extensions
        )

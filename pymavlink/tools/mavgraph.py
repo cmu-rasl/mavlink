@@ -11,6 +11,12 @@ from math import *
 
 from pymavlink.mavextra import *
 
+# cope with rename of raw_input in python3
+try:
+    input = raw_input
+except NameError:
+    pass
+
 colourmap = {
     'apm' : {
         'MANUAL'    : (1.0,   0,   0),
@@ -154,6 +160,7 @@ parser.add_argument("--flightmode", default=None,
                     help="Choose the plot background according to the active flight mode of the specified type, e.g. --flightmode=apm for ArduPilot or --flightmode=px4 for PX4 stack logs.  Cannot be specified with --xaxis.")
 parser.add_argument("--dialect", default="ardupilotmega", help="MAVLink dialect")
 parser.add_argument("--output", default=None, help="provide an output format")
+parser.add_argument("--timeshift", type=float, default=0, help="shift time on first graph in seconds")
 parser.add_argument("logs_fields", metavar="<LOG or FIELD>", nargs="+")
 args = parser.parse_args()
 
@@ -231,7 +238,7 @@ def add_data(t, msg, vars, flightmode):
         y[i].append(v)
         x[i].append(xv)
 
-def process_file(filename):
+def process_file(filename, timeshift):
     '''process one file'''
     print("Processing %s" % filename)
     mlog = mavutil.mavlink_connection(filename, notimestamps=args.notimestamps, zero_time_base=args.zero_time_base, dialect=args.dialect)
@@ -240,7 +247,7 @@ def process_file(filename):
     while True:
         msg = mlog.recv_match(args.condition)
         if msg is None: break
-        tdays = matplotlib.dates.date2num(datetime.datetime.fromtimestamp(msg._timestamp))
+        tdays = matplotlib.dates.date2num(datetime.datetime.fromtimestamp(msg._timestamp+timeshift))
         add_data(tdays, msg, mlog.messages, mlog.flightmode)
 
 if len(filenames) == 0:
@@ -256,9 +263,12 @@ if args.labels is not None:
 else:
     labels = None
 
+timeshift = args.timeshift
+
 for fi in range(0, len(filenames)):
     f = filenames[fi]
-    process_file(f)
+    process_file(f, timeshift)
+    timeshift = 0
     for i in range(0, len(x)):
         if first_only[i] and fi != 0:
             x[i] = []
@@ -278,7 +288,7 @@ for fi in range(0, len(filenames)):
 if args.output is None:
     pylab.show()
     pylab.draw()
-    raw_input('press enter to exit....')
+    input('press enter to exit....')
 else:
     pylab.legend(loc=2,prop={'size':8})
     pylab.savefig(args.output, bbox_inches='tight', dpi=200)
