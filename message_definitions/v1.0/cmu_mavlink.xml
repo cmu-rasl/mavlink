@@ -26,5 +26,16 @@
       <field type="uint64_t" name="trigger_seq"> Sequence number of trigger pin</field>
       <field type="uint8_t"  name="trigger_id"> ID of triggered pin</field>
     </message>
+    <message id="208" name="L1_ADAPTIVE_DEBUG">
+      <description>Debug message to stream diagnostic data from the L1 Adaptive Attitude Controller</description>
+      <field type="uint64_t" name="timestamp">Timestamp of the message in used</field>
+      <field type="uint16_t" name="seq_id">Sequence id of data</field>
+      <field type="float[3]" name="avl_hat">Angular Velocity Estimate </field>
+      <field type="float[3]" name="dst_hat">Disturbance Estimate</field>
+      <field type="float[3]" name="ang_vel">Angular Velocity obtained from R</field>
+      <field type="float[3]" name="lpd">Disturbance Rate Correction</field>
+      <field type="float[3]" name="rates">Body Rates obtained from Attitude Estimator</field>
+    </message>
+
   </messages>
 </mavlink>
