@@ -36,6 +36,17 @@
       <field type="float[3]" name="lpd">Disturbance Rate Correction</field>
       <field type="float[3]" name="rates">Body Rates obtained from Attitude Estimator</field>
     </message>
+    <message id="209" name="ODOM_MOCAP">
+      <description>Motion capture attitude, position, and velocity</description>
+      <field type="uint64_t" name="time_usec">Timestamp (micros since boot or Unix epoch)</field>
+      <field type="float[4]" name="q">Attitude quaternion (w, x, y, z order, zero-rotation is 1, 0, 0, 0)</field>
+      <field type="float" name="x">X position in meters (NED)</field>
+      <field type="float" name="y">Y position in meters (NED)</field>
+      <field type="float" name="z">Z position in meters (NED)</field>
+      <field type="float" name="vx">X velocity in m/s (NED)</field>
+      <field type="float" name="vy">Y velocity in m/s (NED)</field>
+      <field type="float" name="vz">Z velocity in m/s (NED)</field>
+    </message>
 
   </messages>
 </mavlink>
