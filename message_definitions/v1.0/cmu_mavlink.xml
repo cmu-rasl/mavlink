@@ -47,6 +47,11 @@
       <field type="float" name="vy">Y velocity in m/s (NED)</field>
       <field type="float" name="vz">Z velocity in m/s (NED)</field>
     </message>
-
+    <message id="210" name="RPM_OUTPUT">
+      <description>RPM corresponding to the commanded PWM after compensating for voltage</description>
+      <field type="uint64_t" name="time_usec">Timestamp (micros since boot or Unix epoch)</field>
+      <field type="uint32_t" name="noutputs">Number of valid outputs</field>
+      <field type="float[16]" name="output">RPM outputs</field>
+    </message>
   </messages>
 </mavlink>
