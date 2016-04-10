@@ -103,7 +103,7 @@
       <field type="int16_t[3]" name="vel">Reference velocity (x, y, z) in mm/s</field>
       <field type="int16_t[3]" name="acc">Reference acceleration (x, y, z) in mm/s^2</field>
       <field type="int16_t[3]" name="jerk">Reference jerk (x, y, z) in mm/s^3</field>
-      <field type="int16_t" name="heading">Reference heading in rad/10^4</field>
+      <field type="int16_t[3]" name="heading">Reference heading in mrad, mrad/s, mrad/s^2</field>
     </message>
     <message id="218" name="MOCAP_POSITION_CMD_GAINS">
       <description>Mocap position command gains</description>
