@@ -112,5 +112,31 @@
       <field type="float[3]" name="kp">Proportional gains</field>
       <field type="float[3]" name="kd">Derivative gains</field>
     </message>
+    <message id="219" name="BLINKM_CONTROL">
+      <description>LED control</description>
+      <field type="uint64_t" name="time_usec">Timestamp (micros since boot or Unix epoch)</field>
+      <field type="uint8_t" name="target_system">Target system</field>
+      <field type="uint8_t" name="control">LED Control Variable</field>
+    </message>
+    <message id="220" name="CHARGER_INFO">
+      <description>External charging circuit information</description>
+      <field type="uint64_t" name="time_usec">Timestamp (micros since boot or Unix epoch)</field>
+      <field type="uint8_t" name="target_system">Target system</field>
+      <field type="int32_t" name="voltage">Voltage from UPS sensor</field>
+      <field type="int32_t" name="ups_current">Current from UPS sensor</field>
+      <field type="int32_t" name="hss_current">Current from HSS sensor</field>
+      <field type="uint8_t" name="gpio_status">status of GPIO on HSS</field>
+    </message>
+    <message id="221" name="CHARGER_GPIO">
+      <description>HSS gpio toggle message</description>
+      <field type="uint64_t" name="time_usec">Timestamp (micros since boot or Unix epoch)</field>
+      <field type="uint8_t" name="target_system">Target system</field>
+      <field type="uint8_t" name="on">toggle GPIO on or off</field>
+    </message>
+    <message id="222" name="MOCAP_POSE">
+      <description>Mocap pose of single robot</description>
+      <field type="uint64_t" name="time_usec">Timestamp (micros since boot or Unix epoch)</field>
+      <field type="int16_t[4]" name="pose">Robot pose (x, y, z, heading) in m/10^3 or rad/10^4</field>
+    </message>
   </messages>
 </mavlink>
