@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <mavlink>
-  <include>standard.xml</include>
+  <include>common.xml</include>
   <!-- NOTE: If the included file already contains a version tag, remove the version tag here, else uncomment to enable. -->
   <!--<version>3</version>-->
   <enums>
