@@ -53,5 +53,27 @@
       <field type="uint32_t" name="noutputs">Number of valid outputs</field>
       <field type="float[16]" name="output">RPM outputs</field>
     </message>
+    <message id="211" name="CASCADED_CMD">
+      <description>Cascaded command inputs</description>
+      <field type="uint64_t" name="time_usec">Timestamp (micros since boot or Unix epoch)</field>
+      <field type="uint8_t" name="target_system">Target system</field>
+      <field type="float" name="thrust">Thrust (N)</field>
+      <field type="float[4]" name="q">Attitude quaternion (w, x, y, z order, zero-rotation is 1, 0, 0, 0)</field>
+      <field type="float[3]" name="ang_vel">Angular velocity about body axes (x, y, z)</field>
+      <field type="float[3]" name="ang_acc">Angular velocity about body axes (x, y, z)</field>
+    </message>
+    <message id="212" name="CASCADED_CMD_GAINS">
+      <description>Cascaded command gains</description>
+      <field type="uint64_t" name="time_usec">Timestamp (micros since boot or Unix epoch)</field>
+      <field type="uint8_t" name="target_system">Target system</field>
+      <field type="float[3]" name="kR">Rotational gains</field>
+      <field type="float[3]" name="kOm">Derivative gains</field>
+    </message>
+    <message id="213" name="MOCAP_MOTOR_STATE">
+      <description>Motor state control when operating in mocap</description>
+      <field type="uint64_t" name="time_usec">Timestamp (micros since boot or Unix epoch)</field>
+      <field type="uint8_t" name="target_system">Target system</field>
+      <field type="uint8_t" name="state">Motor status (1 = on, 0 = off)</field>
+    </message>
   </messages>
 </mavlink>
