@@ -67,7 +67,6 @@ generate_headers minimal $1
 generate_headers slugs $1
 generate_headers test $1
 generate_headers ASLUAV $1
-generate_headers standard $1
 generate_headers cmu_mavlink $1
 mkdir -p $CLIBRARY_PATH/message_definitions
 cp message_definitions/v1.0/* $CLIBRARY_PATH/message_definitions/.
