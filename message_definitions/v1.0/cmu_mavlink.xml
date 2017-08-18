@@ -58,6 +58,7 @@
       <field type="uint64_t" name="time_usec">Timestamp (micros since boot or Unix epoch)</field>
       <field type="uint8_t" name="target_system">Target system</field>
       <field type="float" name="thrust">Thrust (N)</field>
+      <field type="float" name="current_yaw">Current system heading in world (yaw)</field>
       <field type="float[4]" name="q">Attitude quaternion (w, x, y, z order, zero-rotation is 1, 0, 0, 0)</field>
       <field type="float[3]" name="ang_vel">Angular velocity about body axes (x, y, z)</field>
       <field type="float[3]" name="ang_acc">Angular velocity about body axes (x, y, z)</field>
