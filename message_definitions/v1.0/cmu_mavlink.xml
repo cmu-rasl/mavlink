@@ -144,5 +144,15 @@
       <field type="uint64_t" name="time_usec">Timestamp (micros since boot or Unix epoch)</field>
       <field type="uint16_t[8]" name="pwms">PWM</field>
     </message>
+    <message id="224" name="ESC_STATUS">
+      <description>Status from four ESCs</description>
+      <field type="uint64_t" name="time_usec">Timestamp (micros since boot or Unix epoch)</field>
+      <field type="uint16_t[4]" name="error_count">Error counts</field>
+      <field type="float[4]" name="voltage">Voltage</field>
+      <field type="float[4]" name="current">Current</field>
+      <field type="uint8_t[4]" name="temp">Temperature</field>
+      <field type="int16_t[4]" name="rpm">RPMs (can be negative)</field>
+      <field type="int16_t[4]" name="rpm_setpoint">RPMs (can be negative)</field>
+    </message>
   </messages>
 </mavlink>
